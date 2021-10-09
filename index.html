@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Map</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ <script>
+ function initMap(){
+var options = {
+    zoom:4,
+    center:
+    {
+        lat:20.5937,
+        lng:78.9629
+    }
+}
+
+var map = new google.maps.Map(document.getElementById('map'),options)
+
+
+var markers = [
+    {
+        coords: {lat: 35.8617, lng: 104.1954},
+        content: '<h1>China</h1>'
+    },
+    {
+        coords: {lat: 36.2048, lng: 138.2529},
+        content: '<h1>Japan</h1>'
+    },
+    {
+        coords: {lat: 35.9078, lng: 127.7669},
+        content: '<h1>South Korea</h1>'
+    }
+    ]
+
+    for(var i=0; i<markers.length;i++){
+        addMarker(markers[i])
+    }
+
+function addMarker(props){
+    var marker = new google.maps.Marker({
+        position: props.coords,
+        map: map,
+
+    })
+
+    if(props.content){
+        var infowindow = new google.maps.InfoWindow({
+            content:props.content
+        })
+
+        marker.addListener('click',function(){
+            infowindow.open(map,marker)
+        })
+    }
+}
+ }
+</script>
+
+    <h1>My Google Map</h1>
+    <div id="map"></div>
+    <script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu686jLYhZI8gNtmh97kbDafDm-l84WYY&callback=initMap">
+  </script>
+//  <!-- <script src="./app.js"></script> -->
+</body>
+</html>
